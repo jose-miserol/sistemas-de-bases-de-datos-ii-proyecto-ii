@@ -1,0 +1,23 @@
+{
+  "ingesta_cassandra": {
+    "tiempo_segundos": 8.05,
+    "registros": 100000,
+    "tasa_regs_seg": 12427.05,
+    "timestamp": "2026-02-05T18:55:40.960793"
+  },
+  "etl_spark": {
+    "tiempo_lectura": 13.72,
+    "tiempo_transformacion": 5.34,
+    "tiempo_escritura": 3.67,
+    "tiempo_total": 22.73,
+    "registros_entrada": 411474,
+    "registros_salida": 1830,
+    "timestamp": "2026-02-05T18:56:58.476434"
+  },
+  "consultas_clickhouse": {
+    "consulta_top10": 0.0088,
+    "consulta_promedio": 0.0099,
+    "registros_analizados": 5490,
+    "timestamp": "2026-02-05T18:58:00.597442"
+  }
+}
