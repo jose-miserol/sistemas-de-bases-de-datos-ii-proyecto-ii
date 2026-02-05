@@ -12,6 +12,8 @@
 
 **Sistemas de Bases de Datos II • Proyecto N° 2 • Semestre 2025-11**
 
+</div>
+
 ---
 
 ## � Descripción del Proyecto
@@ -101,7 +103,6 @@ proyecto_bigdata/
 2. **Levantar los servicios:**
 
    ```bash
-   cd infra
    docker-compose up -d
    ```
 
@@ -120,16 +121,6 @@ proyecto_bigdata/
 
    ```
    http://localhost:8888
-   ```
-
-5. **Configurar esquemas de base de datos:**
-
-   ```bash
-   # Cassandra
-   docker exec -it cassandra-container cqlsh < cassandra/schema.cql
-
-   # ClickHouse
-   docker exec -it clickhouse-container clickhouse-client < clickhouse/schema.sql
    ```
 
 ---
