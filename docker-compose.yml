@@ -1,0 +1,81 @@
+services:
+  cassandra:
+    image: cassandra:4.1.4 # ⚠️ Version pinning - NO usar :latest
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=lab_cluster
+      - CASSANDRA_DC=dc1
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    healthcheck:
+      test: ["CMD-SHELL", "cqlsh -e 'describe cluster'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - bigdata_net
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.1.2 # ⚠️ Version pinning - NO usar :latest
+    container_name: clickhouse
+    ports:
+      - "8123:8123" # HTTP
+      - "9000:9000" # Native
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+      - ./infra/clickhouse/schema.sql:/docker-entrypoint-initdb.d/init.sql # ⚙️ Auto-init db/table
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    networks:
+      - bigdata_net
+
+  # ⚙️ Servicio efímero para inicializar esquema Cassandra
+  init-cassandra:
+    image: cassandra:4.1.4
+    container_name: init-cassandra
+    volumes:
+      - ./infra/cassandra:/infra/cassandra
+    depends_on:
+      cassandra:
+        condition: service_healthy # Espera a que Cassandra esté listo
+    command: >
+      bash -c "echo '⏳ Esperando a Cassandra...' && sleep 5 &&
+      cqlsh cassandra -f /infra/cassandra/schema.cql &&
+      echo '✅ Esquema Cassandra creado exitosamente.'"
+    networks:
+      - bigdata_net
+
+  jupyter:
+    image: jupyter/pyspark-notebook:spark-3.5.0 # ⚠️ CRÍTICO: Version pinning para estabilidad
+    container_name: jupyter-spark
+    user: "1000:100" # jovyan UID - evita problemas de permisos en Linux
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work/notebooks
+      - ./src:/home/jovyan/work/src
+      - ./infra:/home/jovyan/work/infra
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=admin
+      - PYSPARK_SUBMIT_ARGS=--packages com.datastax.spark:spark-cassandra-connector_2.12:3.5.0,com.clickhouse:clickhouse-jdbc:0.5.0 pyspark-shell
+    depends_on:
+      cassandra:
+        condition: service_healthy
+      clickhouse:
+        condition: service_started
+    networks:
+      - bigdata_net
+
+networks:
+  bigdata_net:
+    driver: bridge
+
+volumes:
+  cassandra_data:
+  clickhouse_data:
