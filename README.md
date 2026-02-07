@@ -64,17 +64,16 @@ proyecto_bigdata/
 │   └── clickhouse/
 │       └── schema.sql              # Esquema de tabla ventas_resumen
 ├── notebooks/
-│   ├── 01_validacion_conectividad.ipynb
-│   ├── 02_generador_datos.ipynb
-│   └── 03_etl_spark.ipynb
-├── src/
-│   ├── generador_datos.py          # Script de generación de datos sintéticos
-│   └── etl_spark.py                # Pipeline ETL con PySpark
+│   ├── 01_connection.ipynb         # Validación de conectividad
+│   ├── 02_generador_datos.ipynb    # Generación e ingesta de datos
+│   ├── 03_etl_spark.ipynb          # Pipeline ETL con PySpark
+│   └── 04_validacion_metricas.ipynb # Validación y consultas analíticas
 ├── docs/
-│   ├── capturas/                   # Screenshots para el informe
-│   ├── diagrama_arquitectura.png
-│   └── informe_final.pdf           # Entregable final
-├── Task.md                         # Lista de tareas detallada
+│   ├── metricas.json               # Métricas de ejecución (JSON)
+│   ├── metricas_reales.md          # Informe de métricas (Markdown)
+│   ├── consultas_analiticas.sql    # Scripts SQL de consultas
+│   ├── sistema_de_bases_de_datos...pdf # Informe final del proyecto
+│   └── screenshot-v1...v4.jpeg     # Evidencia de ejecución
 └── README.md                       # Este archivo
 ```
 
@@ -323,15 +322,13 @@ El proyecto requiere la entrega de un **documento PDF único** que contenga:
 
 ## 👥 Equipo
 
-<div align="center">
-
 Este proyecto fue desarrollado para la asignatura **Sistemas de Bases de Datos II** de la UNEG.
 
-| 🎭 Rol                    | 📋 Responsabilidad                                 | 👤 Integrante  |
-| :------------------------ | :------------------------------------------------- | :------------- |
-| **🏗️ Data Architect**     | Modelado de esquemas, ETL y diseño de arquitectura | Jose Miserol   |
-| **🔐 Security Engineer**  | Validación de datos y pruebas de robustez          | Miguel Gomez   |
-| **📊 Analytics Engineer** | Desarrollo de Pipelines Spark y optimización OLAP  | Anthony Medina |
+| 🎭 Rol                    | 📋 Responsabilidad                       | 👤 Integrante      |
+| :------------------------ | :--------------------------------------- | :----------------- |
+| **🏗️ Data Architect**     | Modelado, Pipelines Spark y ClickHouse   | **Jose Miserol**   |
+| **🔐 Data Engineer**      | Ingesta Cassandra, Validación y Pruebas  | **Miguel Gomez**   |
+| **📊 Analytics Engineer** | Optimización OLAP y Consultas Analíticas | **Anthony Medina** |
 
 </div>
 
@@ -348,4 +345,4 @@ Este proyecto fue desarrollado para la asignatura **Sistemas de Bases de Datos I
 
 ## 📄 Licencia
 
-Proyecto académico - UNEG 2025-11
+Proyecto académico - UNEG 2025-II
