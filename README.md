@@ -96,8 +96,8 @@ proyecto_bigdata/
 1. **Clonar/crear el directorio del proyecto:**
 
    ```bash
-   mkdir proyecto_bigdata
-   cd proyecto_bigdata
+   mkdir sistemas-de-bases-de-datos-ii-proyecto-ii
+   cd sistemas-de-bases-de-datos-ii-proyecto-ii
    ```
 
 2. **Levantar los servicios:**

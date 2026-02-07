@@ -1,23 +1,23 @@
 {
   "ingesta_cassandra": {
-    "tiempo_segundos": 8.05,
+    "tiempo_segundos": 13.3,
     "registros": 100000,
-    "tasa_regs_seg": 12427.05,
-    "timestamp": "2026-02-05T18:55:40.960793"
+    "tasa_regs_seg": 7518.02,
+    "timestamp": "2026-02-07T16:31:30.446213"
   },
   "etl_spark": {
-    "tiempo_lectura": 13.72,
-    "tiempo_transformacion": 5.34,
-    "tiempo_escritura": 3.67,
-    "tiempo_total": 22.73,
-    "registros_entrada": 411474,
-    "registros_salida": 1830,
-    "timestamp": "2026-02-05T18:56:58.476434"
+    "tiempo_lectura": 5.85,
+    "tiempo_transformacion": 3.17,
+    "tiempo_escritura": 1.95,
+    "tiempo_total": 10.97,
+    "registros_entrada": 100000,
+    "registros_salida": 5490,
+    "timestamp": "2026-02-07T16:31:58.205804"
   },
   "consultas_clickhouse": {
-    "consulta_top10": 0.0088,
-    "consulta_promedio": 0.0099,
-    "registros_analizados": 5490,
-    "timestamp": "2026-02-05T18:58:00.597442"
+    "consulta_top10": 0.0128,
+    "consulta_promedio": 0.0096,
+    "registros_analizados": 5651,
+    "timestamp": "2026-02-07T16:32:24.060014"
   }
 }

@@ -53,17 +53,27 @@ services:
   jupyter:
     image: jupyter/pyspark-notebook:spark-3.5.0 # ⚠️ CRÍTICO: Version pinning para estabilidad
     container_name: jupyter-spark
-    user: "1000:100" # jovyan UID - evita problemas de permisos en Linux
+    user: root # ⚙️ Inicia como root para ajustar permisos, luego cambia a jovyan
     ports:
       - "8888:8888"
     volumes:
       - ./notebooks:/home/jovyan/work/notebooks
       - ./docs:/home/jovyan/work/docs
       - ./infra:/home/jovyan/work/infra
+    working_dir: /home/jovyan/work # Directorio de trabajo base
     environment:
       - JUPYTER_ENABLE_LAB=yes
       - JUPYTER_TOKEN=admin
       - PYSPARK_SUBMIT_ARGS=--packages com.datastax.spark:spark-cassandra-connector_2.12:3.5.0,com.clickhouse:clickhouse-jdbc:0.5.0 pyspark-shell
+      - NB_UID=1000 # UID del usuario jovyan
+      - NB_GID=100 # GID del grupo users
+      - CHOWN_HOME=yes # Ajusta permisos automáticamente
+      - CHOWN_EXTRA=/home/jovyan/work # Carpetas adicionales a ajustar
+    command: >
+      bash -c "
+      chown -R 1000:100 /home/jovyan/work &&
+      start-notebook.sh --ServerApp.token='admin' --ServerApp.password='' --ip=0.0.0.0
+      "
     depends_on:
       cassandra:
         condition: service_healthy
