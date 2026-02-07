@@ -142,6 +142,15 @@ Ruta: `work/notebooks/`
 
 ### 5.1 Ejecutar Consultas Analíticas
 
+**Ejecutar desde el archivo SQL:**
+
+```bash
+# Ejecutar las consultas directamente desde el archivo
+docker exec -i clickhouse clickhouse-client --multiquery < docs/consultas_analiticas.sql
+```
+
+**Ejecutar consultas individuales:**
+
 ```bash
 # Consulta 1: Top categorías
 docker exec clickhouse clickhouse-client --query "SELECT categoria, sum(ventas_totales) as total FROM dw_analitico.ventas_resumen GROUP BY categoria ORDER BY total DESC LIMIT 10"
@@ -213,8 +222,6 @@ docker stats
 ```
 
 ---
-
-## Checklist Final
 
 - [ ] 3 contenedores corriendo
 - [ ] Keyspace `ventas_db` creado
