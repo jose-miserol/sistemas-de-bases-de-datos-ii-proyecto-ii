@@ -10,7 +10,7 @@
 
 ### 📚 Universidad Nacional Experimental de Guayana (UNEG)
 
-**Sistemas de Bases de Datos II • Proyecto N° 2 • Semestre 2025-11**
+**Sistemas de Bases de Datos II • Proyecto N° 2 • Semestre 2025-II**
 
 </div>
 
