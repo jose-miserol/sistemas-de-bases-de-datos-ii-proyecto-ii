@@ -1,6 +1,6 @@
 # 📊 Métricas de Rendimiento - Valores Reales
 
-**Fecha de ejecución:** 2026-02-07 16:32:24
+**Fecha de ejecución:** 2026-02-09 21:34:15
 
 ## 1. Diagrama de Arquitectura de Datos
 
@@ -19,16 +19,16 @@ graph LR
 
 | Operación | Tiempo Real | Objetivo | Cumple |
 |:---|:---:|:---:|:---:|
-| Ingesta Cassandra (100k) | 13.30 s | < 5 min | ✅ |
-| Transformación Spark ETL | 10.97 s | < 2 min | ✅ |
-| Consulta Top 10 (ClickHouse) | 0.0128 s | < 3 seg | ✅ |
-| Consulta Promedio (ClickHouse) | 0.0096 s | < 3 seg | ✅ |
+| Ingesta Cassandra (100k) | 13.17 s | < 5 min | ✅ |
+| Transformación Spark ETL | 2.09 s | < 2 min | ✅ |
+| Consulta Top 10 (ClickHouse) | 0.0278 s | < 3 seg | ✅ |
+| Consulta Promedio (ClickHouse) | 0.0079 s | < 3 seg | ✅ |
 
 ## 3. Detalles de Ejecución
 
 - **Registros insertados en Cassandra:** 100,000
 - **Registros procesados por Spark:** 100,000
-- **Registros en ClickHouse:** 5,651
+- **Registros en ClickHouse:** 7,980
 
 ## 4. Análisis Comparativo: Cassandra vs ClickHouse
 
